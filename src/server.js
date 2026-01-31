@@ -1,27 +1,36 @@
-// /src/index.js (veya server.js)
+// src/server.js
 
-// .env içindeki PORT vb. ortam değişkenlerini kullanmak için
 require("dotenv").config();
 
-const sequelize = require("./config/db"); // Veritabanı bağlantısı
-const app = require("./app"); // Express uygulaması
+const path = require("path");
+const sequelize = require("./config/db");
+const app = require("./app");
 
-const User = require("./models/user"); // User modeli
-require("./models/product"); // Product modelini yükleyerek tabloyu oluşturur
+const User = require("./models/user");
+require("./models/product");
 
-const bcrypt = require("bcryptjs"); // Şifre hashlemek için
+const bcrypt = require("bcryptjs");
 
-// Admin kullanıcıyı otomatik oluşturan / güncelleyen fonksiyon
+// ✅ (ÖNEMLİ) Public klasörünü servis et (resimler/css/js her pc'de çalışsın)
+// Eğer app.js içinde zaten yapıyorsan, burayı kaldırabilirsin.
+// Ama garanti olsun diye buraya da koyabilirsin.
+app.use(expressStaticPublic());
+
+function expressStaticPublic() {
+    // app.js içinde express importlu olduğu için burada direkt express kullanmıyoruz.
+    // Sadece static middleware döndürüyoruz:
+    const express = require("express");
+    return express.static(path.join(__dirname, "..", "public"));
+}
+
 async function seedAdmin() {
     const adminUsername = "admin";
     const adminPassword = "1234";
 
-    // Admin şifresini güvenli şekilde hashler
     const passwordHash = await bcrypt.hash(adminPassword, 10);
 
     const admin = await User.findOne({ where: { username: adminUsername } });
 
-    // Admin yoksa oluşturur
     if (!admin) {
         await User.create({
             username: adminUsername,
@@ -32,7 +41,6 @@ async function seedAdmin() {
         return;
     }
 
-    // Admin varsa şifre ve rol bilgisini garantiye alır
     admin.passwordHash = passwordHash;
     admin.role = "admin";
     await admin.save();
@@ -40,35 +48,27 @@ async function seedAdmin() {
     console.log("✅ Admin updated: admin / 1234");
 }
 
-// Sunucuyu başlatan ana fonksiyon
 async function start() {
     try {
-        // Veritabanına bağlanır
         await sequelize.authenticate();
         console.log("✅ DB connected");
 
-        // Modelleri veritabanı ile senkronize eder
         await sequelize.sync();
-
-        // Gerekirse tablo yapısını güncellemek için:
-        // await sequelize.sync({ alter: true });
-
         console.log("✅ Tables synced");
 
-        // Admin kullanıcıyı hazırlar
         await seedAdmin();
 
-        // Sunucuyu ayağa kaldırır
         const PORT = process.env.PORT || 3000;
-        app.listen(PORT, () =>
-            console.log(`✅ Server running: http://localhost:${PORT}`)
-        );
+        app.listen(PORT, () => {
+            console.log(`✅ Server running: http://localhost:${PORT}`);
+
+            // ✅ Hızlı test linkleri (terminalden gör)
+            console.log(`🖼️ Test image: http://localhost:${PORT}/images/watch1.png`);
+        });
     } catch (err) {
         console.error("❌ Startup error:", err?.message || err);
+        process.exit(1);
     }
 }
 
-// Uygulamayı başlatır
 start();
-
-
