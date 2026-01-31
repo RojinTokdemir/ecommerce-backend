@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Step 1</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/step1.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR (EJS) -->
+    <%- include("../partials/navbar.ejs") %>
+
+        <!-- CONTENT -->
+        <div class="container my-4">
+
+            <!-- STEPS -->
+            <div class="row align-items-center text-center g-3 mb-4">
+
+                <!-- Step 1 active -->
+                <div class="col-6 col-md-4 d-flex align-items-center justify-content-center gap-2">
+                    <span
+                        class="rounded-circle border border-dark d-inline-flex align-items-center justify-content-center"
+                        style="width:28px;height:28px;">
+                        <span class="bg-dark rounded-circle" style="width:10px;height:10px;"></span>
+                    </span>
+                    <div class="text-start">
+                        <div class="small text-muted">Step 1</div>
+                        <div class="fw-semibold">Address</div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="col-6 col-md-4 d-flex align-items-center justify-content-center gap-2 opacity-50">
+                    <span class="rounded-circle border d-inline-flex align-items-center justify-content-center"
+                        style="width:28px;height:28px;">2</span>
+                    <div class="text-start">
+                        <div class="small text-muted">Step 2</div>
+                        <div class="fw-semibold">Shipping</div>
+                    </div>
+                </div>
+
+                <!-- Step 3 hidden on mobile -->
+                <div class="col-md-4 d-none d-md-flex align-items-center justify-content-center gap-2 opacity-50">
+                    <span class="rounded-circle border d-inline-flex align-items-center justify-content-center"
+                        style="width:28px;height:28px;">3</span>
+                    <div class="text-start">
+                        <div class="small text-muted">Step 3</div>
+                        <div class="fw-semibold">Payment</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- BOX -->
+            <div class="border rounded-3 p-3 p-md-4">
+                <h6 class="fw-bold mb-3">Select Address</h6>
+
+                <div class="d-flex flex-column gap-3">
+
+                    <!-- HOME -->
+                    <label class="bg-body-tertiary rounded-3 p-3" for="addr1">
+                        <div class="d-flex align-items-start justify-content-between gap-3">
+                            <div class="d-flex gap-3">
+                                <div class="form-check mt-1">
+                                    <input class="form-check-input" type="radio" name="address" id="addr1" value="home"
+                                        checked>
+                                </div>
+
+                                <div>
+                                    <div class="d-flex align-items-center gap-2 flex-wrap">
+                                        <div class="fw-semibold">2118 Thornridge</div>
+                                        <span class="badge text-bg-dark rounded-2">HOME</span>
+                                    </div>
+                                    <div class="text-muted small">2118 Thornridge Cir. Syracuse, Connecticut 35624</div>
+                                    <div class="text-muted small">(209) 555-0104</div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center gap-2">
+                                <button class="btn btn-light border btn-sm" type="button" title="Edit">✎</button>
+                                <button class="btn btn-light border btn-sm" type="button" title="Remove">×</button>
+                            </div>
+                        </div>
+                    </label>
+
+                    <!-- OFFICE -->
+                    <label class="bg-body-tertiary rounded-3 p-3" for="addr2">
+                        <div class="d-flex align-items-start justify-content-between gap-3">
+                            <div class="d-flex gap-3">
+                                <div class="form-check mt-1">
+                                    <input class="form-check-input" type="radio" name="address" id="addr2"
+                                        value="office">
+                                </div>
+
+                                <div>
+                                    <div class="d-flex align-items-center gap-2 flex-wrap">
+                                        <div class="fw-semibold">Headoffice</div>
+                                        <span class="badge text-bg-dark rounded-2">OFFICE</span>
+                                    </div>
+                                    <div class="text-muted small">2715 Ash Dr. San Jose, South Dakota 83475</div>
+                                    <div class="text-muted small">(704) 555-0127</div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center gap-2">
+                                <button class="btn btn-light border btn-sm" type="button" title="Edit">✎</button>
+                                <button class="btn btn-light border btn-sm" type="button" title="Remove">×</button>
+                            </div>
+                        </div>
+                    </label>
+
+                    <!-- Add -->
+                    <button class="btn w-100 border border-2 border-secondary-subtle rounded-3 py-4"
+                        style="border-style:dashed;" type="button">
+                        <div class="d-flex flex-column align-items-center justify-content-center">
+                            <span
+                                class="rounded-circle bg-dark text-white d-inline-flex align-items-center justify-content-center mb-2"
+                                style="width:28px;height:28px;">+</span>
+                            <span class="small text-muted">Add New Address</span>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="d-flex justify-content-end gap-3 mt-4">
+                    <button class="btn btn-outline-dark px-4" type="button" onclick="history.back()">Back</button>
+                    <button id="step1Next" class="btn btn-dark px-4" type="button">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER (EJS) -->
+        <%- include("../partials/footer.ejs") %>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+            <script type="module" src="/js/checkout.js"></script>
+</body>
+
+</html>

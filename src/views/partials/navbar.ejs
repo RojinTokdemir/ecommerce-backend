@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary py-3">
+    <div class="container">
+        <a class="navbar-brand fw-bolder" href="/">cyber</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav gap-2">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/products-page">Products</a></li>
+                <li class="nav-item"><a class="nav-link" href="/details-page?id=1">Details</a></li>
+                <li class="nav-item"><a class="nav-link" href="/cart-page">Cart</a></li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Step</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/step1-page">step1</a></li>
+                        <li><a class="dropdown-item" href="/step2-page">step2</a></li>
+                        <li><a class="dropdown-item" href="/step3-page">step3</a></li>
+                    </ul>
+                </li>
+
+                <!-- Admin: başta gizli, sadece admin giriş yapınca navbar.js açacak -->
+                <li class="nav-item">
+                    <a id="navAdmin" class="nav-link d-none" href="/admin-page">Admin</a>
+                </li>
+            </ul>
+
+            <div class="ms-auto d-flex align-items-center gap-3">
+                <a class="icon-btn" href="/favorites" aria-label="Favorites">
+                    <img src="/images/fav.png" alt="" class="nav-icon" onerror="this.style.display='none'">
+                </a>
+
+                <a class="icon-btn" href="/cart-page" aria-label="Cart">
+                    <img src="/images/cart.png" alt="" class="nav-icon" onerror="this.style.display='none'">
+                </a>
+
+                <!-- Login ikonu -->
+                <a id="navLogin" class="icon-btn" href="/login" aria-label="Login">
+                    <img src="/images/user.png" alt="" class="nav-icon" onerror="this.style.display='none'">
+                </a>
+
+                <!-- Logout butonu -->
+                <button id="navLogout" class="btn btn-outline-dark btn-sm d-none" type="button">Logout</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Navbar davranışını JS ile yönetiyorum -->
+<script src="/js/navbar.js"></script>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- ✅ public/ zaten root: doğru yol -->
+    <link rel="stylesheet" href="/css/admin.css" />
+</head>
+
+<body>
+
+    <!-- ✅ NAVBAR partial -->
+    <%- include("../partials/navbar.ejs") %>
+
+        <!-- ====== CONTENT ====== -->
+        <main class="container my-4 page-wrap">
+
+            <!-- ✅ Admin değilse içerik gösterme -->
+            <% if (!isAdmin) { %>
+                <div class="alert alert-danger rounded-4">
+                    Bu sayfa sadece admin içindir.
+                </div>
+                <% } else { %>
+
+                    <!-- Hero -->
+                    <div class="admin-hero p-4 p-lg-5 mb-4">
+                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div>
+                                <h1 class="display-6 fw-bold mb-1">Ürün Yönetimi</h1>
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <button id="refreshBtn" class="btn btn-outline-secondary">Refresh</button>
+                                <button class="btn btn-outline-secondary" data-bs-toggle="collapse"
+                                    data-bs-target="#addProductCard">
+                                    + New Product
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-4">
+
+                        <!-- Add Product -->
+                        <div class="col-12 col-lg-5">
+                            <div class="collapse show" id="addProductCard">
+                                <div class="card border-0 shadow-sm rounded-4">
+                                    <div class="card-body p-4">
+                                        <div class="d-flex align-items-center justify-content-between mb-3">
+                                            <h5 class="fw-bold mb-0">Ürün Ekle</h5>
+                                            <span class="text-muted small">Admin only</span>
+                                        </div>
+
+                                        <div class="row g-3">
+                                            <div class="col-12">
+                                                <label class="form-label small text-muted">Title</label>
+                                                <input id="title" class="form-control form-control-lg"
+                                                    placeholder="Örn: iPhone 15 Pro" />
+                                            </div>
+
+                                            <div class="col-6">
+                                                <label class="form-label small text-muted">Price</label>
+                                                <input id="price" class="form-control" placeholder="Örn: 49999"
+                                                    type="number" />
+                                            </div>
+
+                                            <div class="col-6">
+                                                <label class="form-label small text-muted">Stock</label>
+                                                <input id="stock" class="form-control" placeholder="Örn: 12"
+                                                    type="number" />
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label class="form-label small text-muted">Image URL</label>
+                                                <input id="imageUrl" class="form-control" placeholder="https://..." />
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label class="form-label small text-muted">Description</label>
+                                                <input id="description" class="form-control"
+                                                    placeholder="Kısa açıklama..." />
+                                            </div>
+
+                                            <div class="col-12 d-grid mt-2">
+                                                <button id="addBtn" class="btn btn-success btn-lg">Add Product</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product List -->
+                        <div class="col-12 col-lg-7">
+                            <div class="card border-0 shadow-sm rounded-4">
+                                <div class="card-body p-4">
+                                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+                                        <h5 class="fw-bold mb-0">Ürünler</h5>
+
+                                        <div class="d-flex gap-2">
+                                            <input id="searchInput" class="form-control" style="max-width: 260px;"
+                                                placeholder="Search..." />
+                                        </div>
+                                    </div>
+
+                                    <!-- admin.js burada <li> basıyor diye UL'ü koruyoruz -->
+                                    <ul id="productList" class="list-group list-group-flush"></ul>
+
+                                    <div id="emptyState" class="text-center text-muted py-5 d-none">
+                                        Henüz ürün yok.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Toast -->
+                    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
+                        <div id="adminToast" class="toast align-items-center border-0" role="alert"
+                            aria-live="assertive" aria-atomic="true">
+                            <div class="d-flex">
+                                <div id="adminToastBody" class="toast-body">İşlem tamamlandı.</div>
+                                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <% } %>
+        </main>
+
+        <!-- ✅ FOOTER partial -->
+        <%- include("../partials/footer.ejs") %>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+            <!-- ✅ admin.js çalışsın -->
+            <script src="/js/admin.js"></script>
+</body>
+
+</html>

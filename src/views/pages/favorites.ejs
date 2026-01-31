@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Favorites</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/produt.css">
+</head>
+
+<body>
+    <%- include("../partials/navbar.ejs") %>
+
+        <div class="container my-5">
+            <h1 class="fw-bold">Favorites</h1>
+            <p class="text-muted" id="favEmptyText">Henüz favori ürün yok.</p>
+
+            <div class="row g-4 mt-2" id="favoritesList"></div>
+        </div>
+
+        <%- include("../partials/footer.ejs") %>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+            <script type="module" src="/js/favorites.js"></script>
+</body>
+
+</html>

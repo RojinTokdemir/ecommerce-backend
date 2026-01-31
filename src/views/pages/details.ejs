@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/details.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR (EJS) -->
+    <%- include("../partials/navbar.ejs") %>
+
+        <!-- ====== DETAILS 1 ====== -->
+        <div class="container my-5">
+            <div class="row g-4 align-items-center">
+
+                <!-- left image -->
+                <div class="col-12 col-lg-6 text-center">
+                    <img id="detailImg" src="" class="img-fluid product-img" alt="">
+                </div>
+
+                <!-- right info -->
+                <div class="col-12 col-lg-6">
+                    <h2 id="detailTitle" class="fw-bold mb-2"></h2>
+                    <h3 id="detailPrice" class="fw-bold mb-3"></h3>
+
+                    <!-- color -->
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="fw-semibold">Color</span>
+                            <div class="d-flex gap-2">
+                                <span class="color-dot bg-dark"></span>
+                                <span class="color-dot bg-primary"></span>
+                                <span class="color-dot bg-danger"></span>
+                                <span class="color-dot bg-warning"></span>
+                                <span class="color-dot bg-light border"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- memory -->
+                    <div class="mb-4">
+                        <div class="fw-semibold mb-2">Storage :</div>
+                        <div class="d-flex gap-2 flex-wrap">
+                            <button class="btn btn-outline-secondary">128GB</button>
+                            <button class="btn btn-outline-secondary">256GB</button>
+                            <button class="btn btn-outline-secondary">512GB</button>
+                            <button class="btn btn-outline-dark">1TB</button>
+                        </div>
+                    </div>
+
+                    <!-- explain -->
+                    <p class="text-muted mb-4">
+                        Enhanced capabilities thanks toan enlarged display of 6.7 inchesand work
+                        without rechargingthroughout the day. Incredible photosas in weak, yesand
+                        in bright lightusing the new systemwith two cameras more...
+                    </p>
+
+                    <!-- info -->
+                    <div class="row g-3 mb-4">
+                        <div class="col-12 col-md-4">
+                            <div class="spec-card">
+                                <img class="spec-icon" src="/images/Screensize.png" alt="">
+                                <div class="spec-text">
+                                    <small>Screen size</small>
+                                    <strong>6.7"</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="spec-card">
+                                <img class="spec-icon" src="/images/icon1.png" alt="">
+                                <div class="spec-text">
+                                    <small>CPU</small>
+                                    <strong>Apple A16 </strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="spec-card">
+                                <img class="spec-icon" src="/images/icon2.png" alt="">
+                                <div class="spec-text">
+                                    <small>Number of Cores</small>
+                                    <strong>6</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="spec-card">
+                                <img class="spec-icon" src="/images/icon3.png" alt="">
+                                <div class="spec-text">
+                                    <small>Main camera</small>
+                                    <strong>48-12-12 MP</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="spec-card">
+                                <img class="spec-icon" src="/images/icon3.png" alt="">
+                                <div class="spec-text">
+                                    <small>Front-camera</small>
+                                    <strong>12 MP</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="spec-card">
+                                <img class="spec-icon" src="/images/icon3.png" alt="">
+                                <div class="spec-text">
+                                    <small>Battery capacity</small>
+                                    <strong>4323 mAh</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- button -->
+                <div class="d-flex justify-content-end gap-2">
+                    <button class="btn btn-outline-dark px-4">Add to Wishlist</button>
+                    <button id="addToCartBtn" class="btn btn-dark px-4">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== DETAILS 2 ====== -->
+        <div class="bg-light py-5">
+            <div class="container">
+                <div class="bg-white rounded-4 p-4 p-lg-5 shadow-sm">
+
+                    <h4 class="fw-bold mb-3">Details</h4>
+
+                    <p class="text-muted mb-4" style="max-width: 800px;">
+                        Just as a book is judged by its cover, the first thing you notice when you pick up a modern
+                        smartphone is the display.
+                        Advanced technologies allow cutting the display for the front camera and speaker, leaving no
+                        room
+                        for bold design solutions.
+                    </p>
+
+                    <h6 class="fw-bold mt-4">Screen</h6>
+
+                    <div class="border-bottom py-2 d-flex justify-content-between">
+                        <span class="text-muted">Screen diagonal</span>
+                        <span>6.7"</span>
+                    </div>
+
+                    <div class="border-bottom py-2 d-flex justify-content-between">
+                        <span class="text-muted">The screen resolution</span>
+                        <span>2796×1290</span>
+                    </div>
+
+                    <div class="border-bottom py-2 d-flex justify-content-between">
+                        <span class="text-muted">The screen refresh rate</span>
+                        <span>120 Hz</span>
+                    </div>
+
+                    <div class="border-bottom py-2 d-flex justify-content-between">
+                        <span class="text-muted">The pixel density</span>
+                        <span>460 ppi</span>
+                    </div>
+
+                    <div class="border-bottom py-2 d-flex justify-content-between">
+                        <span class="text-muted">Screen type</span>
+                        <span>OLED</span>
+                    </div>
+
+                    <div class="border-bottom py-2 d-flex justify-content-between">
+                        <span class="text-muted">Additionally</span>
+                        <span class="text-end">
+                            Dynamic Island<br>
+                            Always-On display<br>
+                            HDR display<br>
+                            True Tone<br>
+                            Wide color (P3)
+                        </span>
+                    </div>
+
+                    <h6 class="fw-bold mt-5">CPU</h6>
+
+                    <div class="border-bottom py-2 d-flex justify-content-between">
+                        <span class="text-muted">CPU</span>
+                        <span>A16 Bionic</span>
+                    </div>
+
+                    <div class="border-bottom py-2 d-flex justify-content-between">
+                        <span class="text-muted">Number of cores</span>
+                        <span>6</span>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button class="btn btn-outline-dark px-4">View More</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== COMMENT ====== -->
+        <div class="bg-light py-5">
+            <div class="container">
+                <div class="bg-white rounded-4 p-4 p-lg-5 shadow-sm">
+                    <h4 class="fw-bold mb-4">Reviews</h4>
+
+                    <div class="row g-4 align-items-center mb-5">
+                        <div class="col-12 col-lg-3 text-center">
+                            <div class="display-4 fw-bold">4.8</div>
+                            <div class="text-muted mb-2">of 125 reviews</div>
+                            <div class="text-warning fs-5">★★★★☆</div>
+                        </div>
+
+                        <div class="col-12 col-lg-9">
+                            <div class="review-bar">
+                                <span>Excellent</span>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" style="width: 90%"></div>
+                                </div>
+                                <span class="count">100</span>
+                            </div>
+                            <div class="review-bar">
+                                <span>Good</span>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" style="width: 70%"></div>
+                                </div>
+                                <span class="count">15</span>
+                            </div>
+                            <div class="review-bar">
+                                <span>Average</span>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" style="width: 40%"></div>
+                                </div>
+                                <span class="count">5</span>
+                            </div>
+                            <div class="review-bar">
+                                <span>Below Avg</span>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" style="width: 20%"></div>
+                                </div>
+                                <span class="count">3</span>
+                            </div>
+                            <div class="review-bar">
+                                <span>Poor</span>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" style="width: 10%"></div>
+                                </div>
+                                <span class="count">2</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="review-item mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="/images/User Pic (2).png" class="review-avatar" alt="">
+                                <strong>Grace Carey</strong>
+                            </div>
+                            <small class="text-muted">24 January, 2023</small>
+                        </div>
+
+                        <div class="text-warning mb-2">★★★★☆</div>
+
+                        <p class="text-muted mb-0">
+                            I was a bit nervous to buy a secondhand phone, but I couldn’t be happier with my purchase.
+                            The phone is in excellent condition and works perfectly.
+                        </p>
+                    </div>
+
+                    <div class="review-item mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="/images/User Pic (1).png" class="review-avatar" alt="">
+                                <strong>Ronald Richards</strong>
+                            </div>
+                            <small class="text-muted">24 January, 2023</small>
+                        </div>
+
+                        <div class="text-warning mb-2">★★★★☆</div>
+
+                        <p class="text-muted mb-0">
+                            This phone has 1T storage and is durable. Plus all the new iPhones have a C port! Apple is
+                            phasing out the current ones! (All about the Benjamin’s) So if you want a phone that’s going
+                            to last grab an iPhone 14 pro max and get several cords and plugs.
+                        </p>
+                    </div>
+
+                    <div class="review-item mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="/images/User Pic.png" class="review-avatar" alt="">
+                                <strong>Darcy King</strong>
+                            </div>
+                            <small class="text-muted">24 January, 2023</small>
+                        </div>
+
+                        <div class="text-warning mb-2">★★★★☆</div>
+
+                        <p class="text-muted mb-3">
+                            I might be the only one to say this but the camera is a little funky.
+                            Hoping it will change with a software update; otherwise, love this phone!
+                            Came in great condition.
+                        </p>
+
+                        <div class="review-photos">
+                            <img src="/images/Review=Image1.png" class="review-photo" alt="">
+                            <img src="/images/Review=Image2.png" class="review-photo" alt="">
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button class="btn btn-outline-dark px-4">View More</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== PRODUCT ====== -->
+        <div class="row m-5">
+            <div class="col-sm-6 col-md-6 col-lg-3 d-flex justify-content-center">
+                <div class="card" style="width: 18rem;">
+                    <img src="/images/phone5.png" class="card-img-top mx-auto d-block mt-4" alt="...">
+                    <div class="card-body text-center">
+                        <p class="card-title">Apple iPhone 14 Pro 512GB Gold (MQ233)</p>
+                        <h5 class="card-text">$1437</h5>
+                        <a href="#" class="btn btn-dark">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-lg-3 d-flex justify-content-center">
+                <div class="card" style="width: 18rem;">
+                    <img src="/images/audio2.png" class="card-img-top mx-auto d-block mt-4" alt="...">
+                    <div class="card-body text-center">
+                        <p class="card-title">AirPods Max Silver</p>
+                        <h5 class="card-text">$549</h5>
+                        <a href="#" class="btn btn-dark">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-lg-3 d-flex justify-content-center">
+                <div class="card" style="width: 18rem;">
+                    <img src="/images/watch2.png" class="card-img-top mx-auto d-block mt-4" alt="...">
+                    <div class="card-body text-center">
+                        <p class="card-title">Apple Watch Series 9 GPS 41mm Starlight Aluminium Case</p>
+                        <h5 class="card-text">$399</h5>
+                        <a href="#" class="btn btn-dark">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-lg-3 d-flex justify-content-center">
+                <div class="card" style="width: 18rem;">
+                    <img src="/images/phone1.png" class="card-img-top mx-auto d-block mt-4" alt="...">
+                    <div class="card-body text-center">
+                        <p class="card-title">Apple iPhone 14 Pro 1TB Gold (MQ2V3)</p>
+                        <h5 class="card-text">$1437</h5>
+                        <a href="#" class="btn btn-dark">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER (EJS) -->
+        <%- include("../partials/footer.ejs") %>
+
+            <!-- Bootstrap JS -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+            <!-- Details JS -->
+            <script src="/js/details.js"></script>
+</body>
+
+</html>
