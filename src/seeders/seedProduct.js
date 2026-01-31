@@ -2,19 +2,108 @@
 const Product = require("../models/product");
 
 async function seedProducts() {
-    const count = await Product.count();
-    if (count > 0) {
-        console.log("✅ Products already exist, seed skipped.");
-        return;
+    try {
+        const count = await Product.count();
+
+        // ✅ DB’de ürün varsa seed tekrar çalışmasın
+        if (count > 0) {
+            console.log("✅ Products already exist, seed skipped.");
+            return;
+        }
+
+        console.log("🌱 Seeding initial products...");
+
+        await Product.bulkCreate([
+            {
+                title: "watch",
+                price: 456,
+                imageUrl: "/images/watch1.png",
+                description: "Samsung Galaxy Watch6 Classic 47mm Black",
+                stock: 10,
+            },
+            {
+                title: "watch",
+                price: 399,
+                imageUrl: "/images/watch2.png",
+                description: "Apple Watch Series 9 GPS 41mm Starlight Aluminium Case",
+                stock: 25,
+            },
+            {
+                title: "phone",
+                price: 1650,
+                imageUrl: "/images/phone1.png",
+                description: "Apple iPhone 14 Pro Max 128GB Deep Purple (MQ9T3RX/A)",
+                stock: 15,
+            },
+            {
+                title: "phone",
+                price: 1500,
+                imageUrl: "/images/phone2.png",
+                description: "Apple iPhone 14 Pro 256GB Space Black (MQ0T3)",
+                stock: 15,
+            },
+            {
+                title: "phone",
+                price: 2535,
+                imageUrl: "/images/phone3.png",
+                description: "Apple iPhone 13 mini 128GB Pink (MLK23)",
+                stock: 15,
+            },
+            {
+                title: "phone",
+                price: 4555,
+                imageUrl: "/images/phone4.png",
+                description: "Apple iPhone 14 Pro 1TB Gold (MQ2V3)",
+                stock: 15,
+            },
+            {
+                title: "phone",
+                price: 3450,
+                imageUrl: "/images/phone5.png",
+                description: "Apple iPhone 11 128GB White (MQ2V3)",
+                stock: 15,
+            },
+            {
+                title: "phone",
+                price: 4500,
+                imageUrl: "/images/phone6.png",
+                description: "Apple iPhone 14 Pro 1TB Gold (MQ2V3)",
+                stock: 15,
+            },
+            {
+                title: "camera",
+                price: 1550,
+                imageUrl: "/images/camera1.png",
+                description: "Blackmagic Pocket Cinema Camera 6k",
+                stock: 15,
+            },
+            {
+                title: "audio",
+                price: 250,
+                imageUrl: "/images/audio1.png",
+                description: "Galaxy Buds FEGraphite",
+                stock: 15,
+            },
+            {
+                title: "audio",
+                price: 499,
+                imageUrl: "/images/audio2.png",
+                description: "AirPods Max Silver",
+                stock: 15,
+            },
+            {
+                title: "audio",
+                price: 159,
+                imageUrl: "/images/audio3.png",
+                description: "Galaxy Buds FEGraphite",
+                stock: 15,
+            }
+        ]);
+
+        console.log("✅ Products seeded successfully.");
+    } catch (err) {
+        console.error("❌ Seed products error:", err.message);
     }
-
-    await Product.destroy({ where: {}, truncate: true });
-
-    await Product.bulkCreate([
-        { title: "watch", price: 3456, imageUrl: "/images/watch1.png", description: "Smart watch" },
-        { title: "watch", price: 399, imageUrl: "/images/watch2.png", description: "Another watch" },
-        { title: "phone", price: 1500, imageUrl: "/images/phone1.png", description: "Phone product" }
-    ]);
 }
 
 module.exports = seedProducts;

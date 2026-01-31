@@ -4,6 +4,7 @@
 const listEl = document.querySelector("#productList");
 
 const LS_FAVS = "favorites"; // Favori ürün id'lerini localStorage'da tutarım
+const LS_LAST = "lastProductId"; // ✅ Son bakılan ürün id
 
 // localStorage'dan favori id listesini okur
 function getFavIds() {
@@ -79,7 +80,8 @@ function productCardHTML(p) {
 
         <h5 class="card-text fw-bold">$${Number(p.price).toFixed(0)}</h5>
 
-        <a href="${detailUrl}" class="btn btn-dark w-100 mt-2">Buy Now</a>
+        <!-- ✅ Details linkine data-id ekledik -->
+        <a href="${detailUrl}" data-id="${p.id}" class="btn btn-dark w-100 mt-2 details-link">Buy Now</a>
       </div>
     </div>
   </div>
@@ -92,18 +94,28 @@ function renderProducts(items) {
   listEl.innerHTML = items.map(productCardHTML).join("");
 }
 
-// Kalp tıklamalarını container üzerinden yakalayarak favoriyi değiştirir
+// ✅ Tıklamaları tek yerden yönetiyoruz: fav + details
 listEl?.addEventListener("click", (e) => {
-  const btn = e.target.closest(".fav-btn");
-  if (!btn) return;
+  // 1) Favori tıklaması
+  const favBtn = e.target.closest(".fav-btn");
+  if (favBtn) {
+    const id = favBtn.dataset.id;
+    toggleFav(id);
 
-  const id = btn.dataset.id;
-  toggleFav(id);
+    // Sadece tıklanan kalbin görünümünü anlık günceller
+    const nowFav = isFav(id);
+    favBtn.classList.toggle("is-fav", nowFav);
+    favBtn.textContent = nowFav ? "♥" : "♡";
+    return;
+  }
 
-  // Sadece tıklanan kalbin görünümünü anlık günceller
-  const nowFav = isFav(id);
-  btn.classList.toggle("is-fav", nowFav);
-  btn.textContent = nowFav ? "♥" : "♡";
+  // 2) Details / Buy Now tıklaması -> lastProductId kaydet
+  const detailsLink = e.target.closest(".details-link");
+  if (detailsLink) {
+    const id = detailsLink.dataset.id;
+    if (id) localStorage.setItem(LS_LAST, String(id));
+    // href ile normal yönlendirme devam etsin
+  }
 });
 
 // Ürünleri backend'den çekip listeyi oluşturur
@@ -120,7 +132,3 @@ async function loadProducts() {
 
 // Sayfa açılınca ürünleri yükler
 loadProducts();
-
-
-
-

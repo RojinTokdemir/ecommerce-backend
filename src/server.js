@@ -1,5 +1,4 @@
 // src/server.js
-
 require("dotenv").config();
 
 const path = require("path");
@@ -11,14 +10,13 @@ require("./models/product");
 
 const bcrypt = require("bcryptjs");
 
+// ✅ NEW: ürün seed fonksiyonu
+const seedProducts = require("./seeders/seedProduct");
+
 // ✅ (ÖNEMLİ) Public klasörünü servis et (resimler/css/js her pc'de çalışsın)
-// Eğer app.js içinde zaten yapıyorsan, burayı kaldırabilirsin.
-// Ama garanti olsun diye buraya da koyabilirsin.
 app.use(expressStaticPublic());
 
 function expressStaticPublic() {
-    // app.js içinde express importlu olduğu için burada direkt express kullanmıyoruz.
-    // Sadece static middleware döndürüyoruz:
     const express = require("express");
     return express.static(path.join(__dirname, "..", "public"));
 }
@@ -48,6 +46,15 @@ async function seedAdmin() {
     console.log("✅ Admin updated: admin / 1234");
 }
 
+function startHttpServer() {
+    const PORT = process.env.PORT || 3000;
+
+    app.listen(PORT, () => {
+        console.log(`✅ Server running: http://localhost:${PORT}`);
+        console.log(`🖼️ Test image: http://localhost:${PORT}/images/watch1.png`);
+    });
+}
+
 async function start() {
     try {
         await sequelize.authenticate();
@@ -56,18 +63,17 @@ async function start() {
         await sequelize.sync();
         console.log("✅ Tables synced");
 
+        // ✅ DB varsa seed’ler çalışsın
         await seedAdmin();
+        await seedProducts();
 
-        const PORT = process.env.PORT || 3000;
-        app.listen(PORT, () => {
-            console.log(`✅ Server running: http://localhost:${PORT}`);
-
-            // ✅ Hızlı test linkleri (terminalden gör)
-            console.log(`🖼️ Test image: http://localhost:${PORT}/images/watch1.png`);
-        });
+        startHttpServer();
     } catch (err) {
-        console.error("❌ Startup error:", err?.message || err);
-        process.exit(1);
+        // ✅ DB yoksa da server açılsın (dummy fallback app.js tarafında çalışacak)
+        console.error("⚠️ DB bağlantısı yok / hata:", err?.message || err);
+        console.log("➡️ DB olmadan devam: /products dummy fallback dönecek (birazdan app.js'yi ayarlayacağız).");
+
+        startHttpServer();
     }
 }
 

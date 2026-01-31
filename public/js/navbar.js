@@ -71,3 +71,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // login.js içinden tetiklenen event ile navbar'ı yeniden çizer
 window.addEventListener("auth-changed", refreshNavbar);
+
+// ✅ Details linkini son bakılan ürüne yönlendir
+(function () {
+    const a = document.getElementById("navDetails");
+    if (!a) return;
+
+    const lastId = localStorage.getItem("lastProductId");
+    if (lastId) {
+        a.href = `/details-page?id=${lastId}`;
+    } else {
+        a.href = "/products-page";
+    }
+})();
+

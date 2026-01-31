@@ -7,6 +7,9 @@ const cookieParser = require("cookie-parser");
 
 const Product = require("./models/product");
 
+// ✅ NEW: dummy ürünler
+const dummyProducts = require("./data/dummyProducts");
+
 const auth = require("./middlewares/auth");
 const requireAdmin = require("./middlewares/requireAdmin");
 const attachUser = require("./middlewares/attachUser");
@@ -69,25 +72,53 @@ app.use("/api/auth", authRoutes);
 // ======================
 // PRODUCTS API
 // ======================
-app.get("/products", async (req, res) => {
+
+// ✅ helper: DB’den ürünleri getir, olmazsa null dön
+async function tryGetDbProducts() {
     try {
         const products = await Product.findAll({ order: [["id", "DESC"]] });
-        res.json(products);
+        return products;
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        console.log("⚠️ DB yok / hata var, dummy kullanılacak:", err.message);
+        return null;
     }
+}
+
+// ✅ GET: ürün listesi
+app.get("/products", async (req, res) => {
+    const products = await tryGetDbProducts();
+
+    // DB yoksa veya DB boşsa -> dummy
+    if (!products || products.length === 0) {
+        return res.json(dummyProducts);
+    }
+
+    res.json(products);
 });
 
+// ✅ GET: ürün detay
 app.get("/products/:id", async (req, res) => {
+    const id = Number(req.params.id);
+
     try {
-        const product = await Product.findByPk(req.params.id);
-        if (!product) return res.status(404).json({ error: "Product not found" });
-        res.json(product);
+        const product = await Product.findByPk(id);
+        if (product) return res.json(product);
+
+        // DB var ama id yoksa -> dummy içinde ara
+        const d = dummyProducts.find((p) => Number(p.id) === id);
+        if (d) return res.json(d);
+
+        return res.status(404).json({ error: "Product not found" });
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        // DB yoksa -> dummy içinde ara
+        const d = dummyProducts.find((p) => Number(p.id) === id);
+        if (d) return res.json(d);
+
+        return res.status(500).json({ error: err.message });
     }
 });
 
+// ✅ POST/PUT/DELETE sadece DB modunda çalışır (DB yoksa hata dönebilir, normal)
 app.post("/products", auth, requireAdmin, async (req, res) => {
     try {
         const { title, price, description, imageUrl, stock } = req.body;
